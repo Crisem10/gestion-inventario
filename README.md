@@ -105,3 +105,6 @@ docker-compose up -d
 ## License
 
 MIT
+=======
+# gestion-inventario
+>>>>>>> 21cac4cd151178a80e3f2209fe1d7a6043d1c9fe
