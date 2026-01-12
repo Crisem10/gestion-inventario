@@ -5,15 +5,17 @@ services:
     image: postgres:16-alpine
     container_name: inventory-db
     restart: always
+    env_file:
+      - ./backend/.env
     environment:
-      POSTGRES_USER: inventory_user
-      POSTGRES_PASSWORD: inventory_pass
-      POSTGRES_DB: inventory_db
+      POSTGRES_USER: ${POSTGRES_USER:-inventory_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-inventory_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-inventory_db}
     ports:
-      - "5433:5432"
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
 volumes:
   postgres_data:
